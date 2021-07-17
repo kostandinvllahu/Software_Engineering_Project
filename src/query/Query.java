@@ -1,11 +1,17 @@
 package query;
 
+import org.openstreetmap.gui.jmapviewer.Coordinate;
+import twitter4j.Status;
 import filters.Filter;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.Layer;
+import ui.MapMarkerCircle;
+import util.Util;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.*;
 
 /**
  * A query over the twitter stream.
@@ -65,9 +71,29 @@ public class Query {
      * This query is no longer interesting, so terminate it and remove all traces of its existence.
      *
      * TODO: Implement this method
+     * It modiefies the layers and makes the query layer 
+     * invisible and sets it with the value of null
      */
     public void terminate() {
-
+    	this.layer.setVisible(false);
+    	this.layer = null;
     }
+     //SHIKO KETU!
+    public void update (Observable o, Object arg) {
+    	Status tweetInfo = (Status) arg;
+    	Coordinate coordinate = Util.statusCoordinate(tweetInfo);
+    	String tweetText = tweetInfo.getText();
+    	String userMiniImageURL = tweetInfo.getUser().getMiniProfileImageURL();
+    	String userProfileImageURL = tweetInfo.getUser().getProfileImageURL();
+    	BufferedImage userMiniImage = Util.imageFromURL(userMiniImageURL);
+    	
+    	MapMarketCircle marker = new MapMarketCircle(layer, coordinate, color, userMiniImage, userProfileImageURL, tweetInfo.getText());
+    	
+    	if(filter.matches(tweetInfo)) {
+    		map.addMapMarker(marker);
+    		System.out.prinln(this.toString() + " --- " + tweetText);
+    	}
+    }
+    
 }
 
