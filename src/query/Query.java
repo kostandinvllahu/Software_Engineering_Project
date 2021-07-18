@@ -16,8 +16,9 @@ import java.util.*;
 /**
  * A query over the twitter stream.
  * TODO: Task 4: you are to complete this class.
+ * SHTIM KODI TE RRJESHTI 78 DHE ME POSHTE DHE IMPLEMENTO OBSERVER
  */
-public class Query {
+public class Query implements Observer {
     // The map on which to display markers when the query matches
     private final JMapViewer map;
     // Each query has its own "layer" so they can be turned on and off all at once

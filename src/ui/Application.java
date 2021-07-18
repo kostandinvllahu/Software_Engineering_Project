@@ -22,6 +22,7 @@ import java.util.Timer;
 /**
  * The Twitter viewer application
  * Derived from a JMapViewer demo program written by Jan Peter Stotz
+ * NDRYSHIME KODI TE RRJESHTI 126-130 DHE 59 , 199-203
  */
 public class Application extends JFrame {
     // The content panel, which contains the entire UI
@@ -51,10 +52,11 @@ public class Application extends JFrame {
      * @param   query   The new query object
      */
     public void addQuery(Query query) {
-        queries.add(query);
-        Set<String> allterms = getQueryTerms();
-        twitterSource.setFilterTerms(allterms);
-        contentPanel.addQuery(query);
+    	 queries.add(query);
+         Set<String> allterms = getQueryTerms();
+         twitterSource.setFilterTerms(allterms);
+         contentPanel.addQuery(query);
+         twitterSource.addObserver(query);
         // TODO: This is the place where you should connect the new query to the twitter source
     }
 
@@ -122,6 +124,11 @@ public class Application extends JFrame {
                 Point p = e.getPoint();
                 ICoordinate pos = map().getPosition(p);
                 // TODO: Use the following method to set the text that appears at the mouse cursor
+                List<MapMarker> mapMarkers = getMarkersCovering(pos, pixelWidth(p));
+                MapMarkerCircleOne marker = (MapMarkerCircleOne) mapMarkers.get(mapMarkers.size() - 1);
+                if(!mapMarkers.isEmpty()) {
+                	map().setToolTipText("<html>" + "<img src=" + marker.getUserProfileImageURL() + ">" + marker.getTweet() + "</html>");
+                }
                 map().setToolTipText("This is a tooltip");
             }
         });
@@ -189,8 +196,10 @@ public class Application extends JFrame {
     // A query has been deleted, remove all traces of it
     public void terminateQuery(Query query) {
         // TODO: This is the place where you should disconnect the expiring query from the twitter source
+    	twitterSource.deleteObserver(query);
         queries.remove(query);
         Set<String> allterms = getQueryTerms();
         twitterSource.setFilterTerms(allterms);
+        this.repaint();
     }
 }

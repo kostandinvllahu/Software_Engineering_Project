@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Test the basic functionality of the TwitterSource
+ * SHTIM KODI RRJESHTI 25
  */
 public class TestPlaybackTwitterSource {
 
@@ -21,6 +22,7 @@ public class TestPlaybackTwitterSource {
         PlaybackTwitterSource source = new PlaybackTwitterSource(1.0);
         TestObserver to = new TestObserver();
         // TODO: Once your TwitterSource class implements Observable, you must add the TestObserver as an observer to it here
+        source.addObserver(to);
         source.setFilterTerms(set("food"));
         pause(3 * 1000);
         assertTrue(to.getNTweets() > 0, "Expected getNTweets() to be > 0, was " + to.getNTweets());
