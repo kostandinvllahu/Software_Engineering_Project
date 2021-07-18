@@ -5,7 +5,7 @@ import twitter4j.Status;
 import filters.Filter;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.Layer;
-import ui.MapMarkerCircle;
+import ui.MapMarkerCircleOne;
 import util.Util;
 
 import javax.swing.*;
@@ -87,11 +87,11 @@ public class Query {
     	String userProfileImageURL = tweetInfo.getUser().getProfileImageURL();
     	BufferedImage userMiniImage = Util.imageFromURL(userMiniImageURL);
     	
-    	MapMarketCircle marker = new MapMarketCircle(layer, coordinate, color, userMiniImage, userProfileImageURL, tweetInfo.getText());
+    	MapMarkerCircleOne marker = new MapMarkerCircleOne (layer, coordinate, color, userMiniImage, userProfileImageURL, tweetInfo.getText());
     	
     	if(filter.matches(tweetInfo)) {
     		map.addMapMarker(marker);
-    		System.out.prinln(this.toString() + " --- " + tweetText);
+    		System.out.println(this.toString() + " --- " + tweetText);
     	}
     }
     
