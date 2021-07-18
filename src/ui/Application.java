@@ -129,7 +129,7 @@ public class Application extends JFrame {
                 if(!mapMarkers.isEmpty()) {
                 	map().setToolTipText("<html>" + "<img src=" + marker.getUserProfileImageURL() + ">" + marker.getTweet() + "</html>");
                 }
-                map().setToolTipText("This is a tooltip");
+               // map().setToolTipText("This is a tooltip");
             }
         });
     }
