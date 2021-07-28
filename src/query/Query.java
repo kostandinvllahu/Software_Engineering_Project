@@ -75,6 +75,8 @@ public class Query implements Observer {
      * It modiefies the layers and makes the query layer 
      * invisible and sets it with the value of null
      */
+    // MODIFIES: this
+    // EFFECTS: makes queries layer invisible and set layer to null
     public void terminate() {
     	this.layer.setVisible(false);
     	this.layer = null;
