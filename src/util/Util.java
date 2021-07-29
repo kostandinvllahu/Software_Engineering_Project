@@ -35,12 +35,36 @@ public class Util {
 
     public static BufferedImage defaultImage = imageFromURL("http://png-2.findicons.com/files/icons/1995/web_application/48/smiley.png");
     public static BufferedImage imageFromURL(String url) {
-        try {
+    	
+    	  try {
+              BufferedImage img = ImageIO.read(new URL(url));
+              if (img == null) 
+            	  {
+            	  return defaultImage;
+            	  }else 
+            	  {
+            	 return img;  
+            	  }
+              
+          } catch (IOException e) {
+              return defaultImage;
+          }
+      }
+        /*try {
             BufferedImage img = ImageIO.read(new URL(url));
-            if (img == null) return defaultImage;
-            return img;
-        } catch (IOException e) {
+            if (img == null) 
+            {
+            	return imageFromURL("http://png-2.findicons.com/files/icons/1995/web_application/48/smiley.png");//defaultImage;
+            }
+            else
+            {
+            	return img;
+            }
+            	
+            
+        } 
+        catch (IOException e) {
             return defaultImage;
         }
-    }
+    }*/
 }

@@ -10,6 +10,7 @@ import query.Query;
 import twitter.PlaybackTwitterSource;
 import twitter.TwitterSource;
 import util.SphericalGeometry;
+import util.Util;
 
 import javax.swing.*;
 import java.awt.*;
