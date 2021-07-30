@@ -32,24 +32,24 @@ public class MapMarkerCircleOne extends MapMarkerCircle {
     }
 
     @Override
-    public void paint(Graphics g, Point position, int radius) {
+    public void paint(Graphics graphics, Point position, int radius) {
         int size = radius;
         int imgSize = radius - 20;
-        if (g instanceof Graphics2D && this.getBackColor() != null) {
-            Graphics2D g2 = (Graphics2D)g;
-            Composite oldComposite = g2.getComposite();
-            g2.setComposite(AlphaComposite.getInstance(3));
-            g2.setPaint(this.getBackColor());
-            g.fillOval(position.x - radius, position.y - radius, size, size);
-            g.drawImage(miniImage, position.x - 30, position.y - 30, imgSize, imgSize,
+        if (graphics instanceof Graphics2D && this.getBackColor() != null) {
+            Graphics2D graphics2D = (Graphics2D)graphics;
+            Composite oldComposite = graphics2D.getComposite();
+            graphics2D.setComposite(AlphaComposite.getInstance(3));
+            graphics2D.setPaint(this.getBackColor());
+            graphics.fillOval(position.x - radius, position.y - radius, size, size);
+            graphics.drawImage(miniImage, position.x - 30, position.y - 30, imgSize, imgSize,
                     Color.black , null);
-            g2.setComposite(oldComposite);
+            graphics2D.setComposite(oldComposite);
         }
-        g.setColor(this.getColor());
-        g.drawOval(position.x - radius, position.y - radius, size, size);
+        graphics.setColor(this.getColor());
+        graphics.drawOval(position.x - radius, position.y - radius, size, size);
 
         if (this.getLayer() == null || this.getLayer().isVisibleTexts()) {
-            this.paintText(g, position);
+            this.paintText(graphics, position);
         }
     }
 }

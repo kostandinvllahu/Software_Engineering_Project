@@ -17,13 +17,13 @@ public class ContentPanel extends JPanel {
 
     private Application app;
 
-    public ContentPanel(Application app) {
-        this.app = app;
+    public ContentPanel(Application application) {
+        this.app = application;
 
         map = new JMapViewer();
         map.setMinimumSize(new Dimension(100, 50));
         setLayout(new BorderLayout());
-        newQueryPanel = new NewQueryPanel(app);
+        newQueryPanel = new NewQueryPanel(application);
 
         // NOTE: We wrap existingQueryList in a container so it gets a pretty border.
         JPanel layerPanelContainer = new JPanel();
@@ -63,7 +63,7 @@ public class ContentPanel extends JPanel {
         removeButton.setPreferredSize(new Dimension(30, 20));
         removeButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent actionEvent) {
                 app.terminateQuery(query);
                 query.terminate();
                 existingQueryList.remove(newQueryPanel);
@@ -71,22 +71,22 @@ public class ContentPanel extends JPanel {
             }
         });
 
-        GridBagConstraints c = new GridBagConstraints();
-        newQueryPanel.add(colorPanel, c);
+        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        newQueryPanel.add(colorPanel, gridBagConstraints);
 
-        c = new GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         JCheckBox checkbox = new JCheckBox(query.getQueryString());
         checkbox.setSelected(true);
         checkbox.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent actionEvent) {
                 app.updateVisibility();
             }
         });
         query.setCheckBox(checkbox);
-        c.weightx = 1.0;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        newQueryPanel.add(checkbox, c);
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        newQueryPanel.add(checkbox, gridBagConstraints);
         newQueryPanel.add(removeButton);
 
         existingQueryList.add(newQueryPanel);

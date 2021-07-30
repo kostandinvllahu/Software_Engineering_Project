@@ -9,20 +9,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TestScanner {
     @Test
     public void testBasic() {
-        Scanner x = new Scanner("trump");
-        assertTrue(x.peek().equals("trump"));
-        assertTrue(x.advance() == null);
+        Scanner scanner = new Scanner("trump");
+        assertTrue(scanner.peek().equals("trump"));
+        assertTrue(scanner.advance() == null);
     }
 
     @Test
     public void testAnd() {
-        Scanner x = new Scanner("trump and evil");
-        assertTrue(x.peek().equals("trump"));
-        assertTrue(x.advance().equals("and"));
-        assertTrue(x.peek().equals("and"));
-        assertTrue(x.advance().equals("evil"));
-        assertTrue(x.peek().equals("evil"));
-        assertTrue(x.advance() == null);
+        Scanner refactor = new Scanner("trump and evil");
+        assertTrue(refactor.peek().equals("trump"));
+        assertTrue(refactor.advance().equals("and"));
+        assertTrue(refactor.peek().equals("and"));
+        assertTrue(refactor.advance().equals("evil"));
+        assertTrue(refactor.peek().equals("evil"));
+        assertTrue(refactor.advance() == null);
     }
 
     @Test
@@ -39,16 +39,16 @@ public class TestScanner {
     }
 
     private void runTest(String input, String[] expected) {
-        Scanner x = new Scanner(input);
+        Scanner scanner = new Scanner(input);
         boolean first = true;
         for (String token : expected) {
             if (first) {
                 first = false;
             } else {
-                assertTrue(x.advance().equals(token));
+                assertTrue(scanner.advance().equals(token));
             }
-            assertTrue(x.peek().equals(token));
+            assertTrue(scanner.peek().equals(token));
         }
-        assertTrue(x.advance() == null);
+        assertTrue(scanner.advance() == null);
     }
 }

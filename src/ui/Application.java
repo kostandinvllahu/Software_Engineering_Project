@@ -87,10 +87,10 @@ public class Application extends JFrame {
         // Set up a motion listener to create a tooltip showing the tweets at the pointer position
         map().addMouseMotionListener(new MouseAdapter() {
             @Override
-            public void mouseMoved(MouseEvent e) {
-                Point p = e.getPoint();
-                ICoordinate pos = map().getPosition(p);
-                List<MapMarker> mapMarkers = getMarkersCovering(pos, pixelWidth(p));
+            public void mouseMoved(MouseEvent mouseEvent) {
+                Point point = mouseEvent.getPoint();
+                ICoordinate coordinate = map().getPosition(point);
+                List<MapMarker> mapMarkers = getMarkersCovering(coordinate, pixelWidth(point));
                 MapMarkerCircleOne marker = (MapMarkerCircleOne) mapMarkers.get(mapMarkers.size() - 1);
                 if (!mapMarkers.isEmpty()) {
                     map().setToolTipText("<html>" + "<img src=" + marker.getUserProfileImageURL() + ">" + marker.getTweet() + "</html>");
@@ -139,10 +139,10 @@ public class Application extends JFrame {
 
     // How big is a single pixel on the map?  We use this to compute which tweet markers
     // are at the current most position.
-    private double pixelWidth(Point p) {
-        ICoordinate center = map().getPosition(p);
-        ICoordinate edge = map().getPosition(new Point(p.x + 1, p.y));
-        return SphericalGeometry.distanceBetween(center, edge);
+    private double pixelWidth(Point point) {
+        ICoordinate coordinateCenter = map().getPosition(point);
+        ICoordinate coordinateEdge = map().getPosition(new Point(point.x + 1, point.y));
+        return SphericalGeometry.distanceBetween(coordinateCenter, coordinateEdge);
     }
 
     // Get those layers (of tweet markers) that are visible because their corresponding query is enabled

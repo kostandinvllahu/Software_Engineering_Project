@@ -2,7 +2,7 @@ package filters;
 
 /**
  * Parse a string in the filter language and return the filter.
- * Throws a SyntaxError exception on failure.
+ * Throws a StringParseException exception on failure.
  *
  * This is a top-down recursive descent parser (a.k.a., LL(1))
  *
@@ -31,29 +31,39 @@ package filters;
  */
 public class Parser {
     private final Scanner scanner;
-    private static final String LPAREN = "(";
-    private static final String RPAREN = ")";
-    private static final String OR = "or";
-    private static final String AND = "and";
-    private static final String NOT = "not";
+    private static final String LPAREN;
+    private static final String RPAREN;
+    private static final String OR;
+    private static final String AND;
+    private static final String NOT;
+    
+    //Making changes here to the code to make it easier to understand
+    static {
+    LPAREN = "(";
+    RPAREN = ")";
+    OR = "or";
+    AND = "and";
+    NOT = "not";
+    		
+    }
 
     public Parser(String input) {
         scanner = new Scanner(input);
     }
 
-    public Filter parse() throws SyntaxError {
+    public Filter parse() throws StringParseException {
         Filter ans = expr();
         if (scanner.peek() != null) {
-            throw new SyntaxError("Extra stuff at end of input");
+            throw new StringParseException("Extra stuff at end of input");
         }
         return ans;
     }
 
-    private Filter expr() throws SyntaxError {
+    private Filter expr() throws StringParseException {
         return orexpr();
     }
 
-    private Filter orexpr() throws SyntaxError {
+    private Filter orexpr() throws StringParseException {
         Filter sub = andexpr();
         String token = scanner.peek();
         while (token != null && token.equals(OR)) {
@@ -69,7 +79,7 @@ public class Parser {
         return sub;
     }
 
-    private Filter andexpr() throws SyntaxError {
+    private Filter andexpr() throws StringParseException {
         Filter sub = notexpr();
         String token = scanner.peek();
         while (token != null && token.equals(AND)) {
@@ -85,7 +95,7 @@ public class Parser {
         return sub;
     }
 
-    private Filter notexpr() throws SyntaxError {
+    private Filter notexpr() throws StringParseException {
         String token = scanner.peek();
         if (token.equals(NOT)) {
             scanner.advance();
@@ -97,13 +107,13 @@ public class Parser {
         }
     }
 
-    private Filter prim() throws SyntaxError {
+    private Filter prim() throws StringParseException {
         String token = scanner.peek();
         if (token.equals(LPAREN)) {
             scanner.advance();
             Filter sub = expr();
             if (!scanner.peek().equals(RPAREN)) {
-                throw new SyntaxError("Expected ')'");
+                throw new StringParseException("Expected ')'");
             }
             scanner.advance();
             return sub;

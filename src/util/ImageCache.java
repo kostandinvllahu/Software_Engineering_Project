@@ -29,19 +29,19 @@ public class ImageCache {
     }
 
     public BufferedImage getImage(String url) {
-        BufferedImage ans = cache.get(url);
-        if (ans == null) {
-            ans = Util.imageFromURL(url);
-            cache.put(url, ans);
+        BufferedImage bufferedImage = cache.get(url);
+        if (bufferedImage == null) {
+            bufferedImage = Util.imageFromURL(url);
+            cache.put(url, bufferedImage);
         }
-        return ans;
+        return bufferedImage;
     }
 
     public void loadImage(String url) {
-        BufferedImage ans = cache.get(url);
-        if (ans == null) {
+        BufferedImage bufferedImage = cache.get(url);
+        if (bufferedImage == null) {
             cache.put(url, defaultImage);
-            Thread t = new Thread() {
+            Thread thread = new Thread() {
                 @Override
                 public void run() {
                     BufferedImage ans = Util.imageFromURL(url);
@@ -54,7 +54,7 @@ public class ImageCache {
 
                 }
             };
-            t.run();
+            thread.run();
         }
     }
 
@@ -71,10 +71,10 @@ public class ImageCache {
 
     private String sha256(String data) {
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            MessageDigest essagesDigestd = MessageDigest.getInstance("SHA-256");
             byte[] bytes = data.getBytes();
-            md.update(bytes);
-            byte[] hash = md.digest();
+            essagesDigestd.update(bytes);
+            byte[] hash = essagesDigestd.digest();
             return bytesToHex(hash);
 
         } catch (NoSuchAlgorithmException e) {
@@ -91,18 +91,18 @@ public class ImageCache {
 
     // I'm going to assume that hashing is good enough and collisions are rare enough
     private String saveImage(BufferedImage image, String path) {
-        File dir = new File("data/imagecache");
-        if (!dir.isDirectory()) {
-            dir.mkdir();
+        File directory = new File("data/imagecache");
+        if (!directory.isDirectory()) {
+            directory.mkdir();
         }
         String pathString = "data/imagecache/" + path + ".png";
-        File f = new File(pathString);
-        pathString = f.getAbsolutePath();
-        if (f.canRead()) return pathString;
+        File file = new File(pathString);
+        pathString = file.getAbsolutePath();
+        if (file.canRead()) return pathString;
         try {
-            ImageIO.write(image, "png", f);
-        } catch (IOException e) {
-            e.printStackTrace();
+            ImageIO.write(image, "png", file);
+        } catch (IOException error) {
+            error.printStackTrace();
         }
         return pathString;
     }

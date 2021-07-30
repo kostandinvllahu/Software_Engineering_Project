@@ -1,0 +1,80 @@
+==============================Refactoring the code================================
+
+Filters package
+---------------
+1) Refactor at SyntaxError.java
+changing the name of the file from SyntaxError to StringParseException since its purpose it 
+"The exception thrown when parsing a string fails" and change the code to make it more easy,
+changing the String s to String message to be more understandable.
+
+2) Refactor at AndFilter.java
+changing the boolean from Status s to Statis status to be more understandable.
+
+3) Refactor at BasicFilter.java
+changin the boolean Status s to Status status to be more understandable.
+
+4) Refactoring at Filter.java 
+changing the boolean Status s to Status status and at catch Exception
+changing the StringParseException syntaxError to filterSyntaxError since its
+responsible for the "StringParseException filterSyntaxError - filters.Filter.parse(String)".
+
+5) Refactoring at NotFilter.java
+changing the boolean Status s to Status status to be more understandable.
+
+6) Refactoring at OrtFilter.java
+changing the boolean Status s to Status status to be more understandable.
+ 
+7) Refactoring at Parser.java 
+making changes at public class Parser removing the symbols and adding it on a different static
+so the programmer can have it easier to find what it contains.
+
+QUERY PACKAGE
+---------------
+1) Refactoring in the Query.java at line 85 changing
+Observable o to Observable observable to be more understandable
+
+TWITTER PACKAGE
+---------------
+1) Refactor at LiveTwitter.java changing the
+ConfigurationBuilder cb to configurationBuilder
+
+2) Refactor at PlaybackTwitterSource.java
+changin the Thread t  to thread and at InterruptException e to error.
+
+3) Refactoring at TwitterSource.java changing
+at line 37 the Status s to status
+
+FILTERS.TEST PACKAGE
+-------------
+1) Refactoring at TestFilters.java changing the
+name of the filters from Filter f to filter, filter1 etc..
+
+2) Refactoring at TestParser.java changing the
+names of the Filter f to filter,filter1...filter8
+
+3) Refactoring at TestScanner.java changing the name of
+the Scanner from x to scanner.
+
+TWITTER.TEST PACKAGE
+--------------------
+1) Refactoring at TestPlaybackTwitterSource.java changing the names of
+error, status, TestObserver.
+ 
+UI PACKAGE
+----------
+1 Refactoring at Application.java the names of
+ICoordinate from edge and center to coordinateCenter and coordinateEdge.
+
+2) Refactoring at ContentPanel.java changing the names of
+GridBagConstraints, activeEvent etc..
+
+3) Refactoring at MapMarkerCircleOne.java changing graphics, and graphics2D.
+
+4) Refactoring at NewQueryPanel.java changing the mousevents, actionevents
+
+UTIL PACKAGE
+------------
+1) Refactoring at ImageCache.java changing directory, file, error, thread, bufferedImage, etc..
+
+2) Refactoring at ObjectSink.java error, object, ioException.
+ 

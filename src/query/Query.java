@@ -82,7 +82,7 @@ public class Query implements Observer {
     	this.layer = null;
     }
      //SHIKO KETU!
-    public void update (Observable o, Object arg) {
+    public void update (Observable observable, Object arg) {
     	Status tweetInfo = (Status) arg;
     	Coordinate coordinate = Util.statusCoordinate(tweetInfo);
     	String tweetText = tweetInfo.getText();

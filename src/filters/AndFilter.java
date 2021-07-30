@@ -16,9 +16,9 @@ public class AndFilter implements Filter {
 	}
 
 	@Override
-	public boolean matches(Status s) {
+	public boolean matches(Status status) {
 		// TODO Auto-generated method stub
-		if(childOne.matches(s) && childTwo.matches(s)) {
+		if(childOne.matches(status) && childTwo.matches(status)) {
 			return true;
 		}else {
 			return false;
