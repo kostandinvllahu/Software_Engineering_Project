@@ -11,21 +11,21 @@ public class SphericalGeometry {
     /**
      * Find distance in metres between two lat/lon points
      *
-     * @param p1  first point
-     * @param p2  second point
+     * @param point1  first point
+     * @param point2  second point
      * @return distance between p1 and p2 in metres
      */
-    public static double distanceBetween(ICoordinate p1, ICoordinate p2) {
-        double lat1 = p1.getLat() / 180.0 * Math.PI;
-        double lat2 = p2.getLat() / 180.0 * Math.PI;
-        double deltaLon = (p2.getLon() - p1.getLon()) / 180.0 * Math.PI;
-        double deltaLat = (p2.getLat() - p1.getLat()) / 180.0 * Math.PI;
+    public static double distanceBetween(ICoordinate point1, ICoordinate point2) {
+        double latitude1 = point1.getLat() / 180.0 * Math.PI;
+        double latitude2 = point2.getLat() / 180.0 * Math.PI;
+        double deltaLongitude = (point2.getLon() - point1.getLon()) / 180.0 * Math.PI;
+        double deltaLatitude = (point2.getLat() - point1.getLat()) / 180.0 * Math.PI;
 
-        double a = Math.sin(deltaLat / 2.0) * Math.sin(deltaLat / 2.0)
-                + Math.cos(lat1) * Math.cos(lat2)
-                * Math.sin(deltaLon / 2.0) * Math.sin(deltaLon / 2.0);
-        double c = 2.0 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double coordinateCalculation = Math.sin(deltaLatitude / 2.0) * Math.sin(deltaLatitude / 2.0)
+                + Math.cos(latitude1) * Math.cos(latitude2)
+                * Math.sin(deltaLongitude / 2.0) * Math.sin(deltaLongitude / 2.0);
+        double totalCalculation = 2.0 * Math.atan2(Math.sqrt(coordinateCalculation), Math.sqrt(1 - coordinateCalculation));
 
-        return c * RADIUS;
+        return totalCalculation * RADIUS;
     }
 }

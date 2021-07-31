@@ -77,4 +77,15 @@ UTIL PACKAGE
 1) Refactoring at ImageCache.java changing directory, file, error, thread, bufferedImage, etc..
 
 2) Refactoring at ObjectSink.java error, object, ioException.
+
+3) Refactoring at ObjectSource.java the error, eofException, object.
+
+4) Refactoring at SphericalGeomertry.java changing point1, point2, latitude1, latitude2,
+deltaLongitude, deltaLatitude, coordinateCalculation, totalCalculation.
+
+5) Refactoring at Util.java changing the newLatitude, newLongitude, location, ioException.
+
+UTIL.TEST
+---------
+1) Refactoring at TestImage.java changing the norm to image.
  
